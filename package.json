@@ -15,7 +15,10 @@
     "captcha",
     "campto"
   ],
-  "author": "Vincent Ting <homerdd@gmail.com>",
+  "author": {
+    "name": "Vincent Ting",
+    "email": "homerdd@gmail.com"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/vincenting/campto/issues"
