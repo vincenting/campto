@@ -1,0 +1,24 @@
+{
+  "name": "campto",
+  "version": "0.0.1",
+  "description": "Captcha package for nodejs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincenting/campto.git"
+  },
+  "keywords": [
+    "nodejs",
+    "captcha",
+    "campto"
+  ],
+  "author": "Vincent Ting <homerdd@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vincenting/campto/issues"
+  },
+  "homepage": "https://github.com/vincenting/campto#readme"
+}
