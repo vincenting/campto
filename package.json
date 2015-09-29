@@ -4,7 +4,7 @@
   "description": "Captcha package for nodejs.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/*.js"
+    "test": "istanbul cover _mocha -- -R spec"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/vincenting/campto/issues"
   },
-  "homepage": "https://github.com/vincenting/campto#readme"
+  "homepage": "https://github.com/vincenting/campto#readme",
+  "dependencies": {
+    "async": "^1.4.2",
+    "gm": "^1.20.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "should": "~2.1.1"
+  }
 }
