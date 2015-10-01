@@ -4,3 +4,5 @@
 
 'use strict';
 
+var Campto = module.exports =function () {
+};

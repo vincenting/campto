@@ -27,9 +27,12 @@
   "dependencies": {
     "async": "^1.4.2",
     "gm": "^1.20.0",
+    "node-uuid": "^1.4.3",
+    "temp": "^0.8.3",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "express": "^4.13.3",
     "mocha": "~1.17.1",
     "should": "~2.1.1"
   }
