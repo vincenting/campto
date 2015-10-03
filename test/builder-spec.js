@@ -43,23 +43,23 @@ describe('test with all known type error', function () {
         'DRAW_TEMP_FILE_WRITE_ERROR',
         'WORD_TO_BUFFER_ERROR',
         'WORD_TEMP_FILE_CREATE_ERROR',
-        'WORD_TEMP_FILE_WRITE_ERROR',
-        'TO_BUFFER_WRITE_ERROR',
-        'TO_FILE_WRITE_ERROR'
+        'WORD_TEMP_FILE_WRITE_ERROR'
     ];
 
     it('should always done whatever error happened when use toFile', function (done) {
         var tempFileName = './temp.png';
         async.map(KNOWN_ERRORS, function (error, callback) {
             CaptchaBuilder.toFile(tempFileName, function (err) {
-                if (err == null) {
-                    return callback('UnKnown error', null);
-                }
                 should(this._done_for_debug).be.exactly(true);
                 callback(null, err)
             }, error);
         }, function (err, result) {
-            should(err == null).be.exactly(true);
+            try {
+                fs.unlinkSync(tempFileName);
+            } catch (_) {
+
+            }
+            should(err).be.exactly(null);
             result.should.eql(KNOWN_ERRORS);
             done();
         });
@@ -68,16 +68,35 @@ describe('test with all known type error', function () {
     it('should always done whatever error happened when use toBuffer', function (done) {
         async.map(KNOWN_ERRORS, function (error, callback) {
             CaptchaBuilder.toBuffer(function (err) {
-                if (err == null) {
-                    return callback('UnKnown error', null);
-                }
                 should(this._done_for_debug).be.exactly(true);
                 callback(null, err)
             }, error);
         }, function (err, result) {
-            should(err == null).be.exactly(true);
+            should(err).be.exactly(null);
             result.should.eql(KNOWN_ERRORS);
             done();
         });
+    });
+
+    it('should pass error error happened in toFile', function (done) {
+        var tempFileName = './temp.png';
+        CaptchaBuilder.toFile(tempFileName, function (err) {
+            should(this._done_for_debug).be.exactly(true);
+            err.should.equal('TO_FILE_WRITE_ERROR');
+            try {
+                fs.unlinkSync(tempFileName);
+            } catch (_) {
+
+            }
+            done();
+        }, 'TO_FILE_WRITE_ERROR');
+    });
+
+    it('should pass error error happened in toBuffer', function (done) {
+        CaptchaBuilder.toBuffer(function (err) {
+            should(this._done_for_debug).be.exactly(true);
+            err.should.equal('TO_BUFFER_WRITE_ERROR');
+            done();
+        }, 'TO_BUFFER_WRITE_ERROR');
     });
 });
