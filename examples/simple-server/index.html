@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Campto simple server</title>
+</head>
+<body>
+<h1>Campto simple server</h1>
+
+<p>
+    <img alt="验证码" id="captchaPlaceholder"/>
+    <small>图片点击刷新</small>
+</p>
+
+<p><input type="text" id="captchaInput" placeholder="请输入验证码"/></p>
+
+<button id="submitCaptcha">提交</button>
+<script>
+    var placeholder = document.getElementById('captchaPlaceholder');
+    var userInput = document.getElementById('captchaInput');
+    var reloadCaptcha = function () {
+        placeholder.src = '/captcha?t=' + Date.now();
+    };
+    reloadCaptcha();
+    placeholder.addEventListener('click', reloadCaptcha);
+    document.getElementById('submitCaptcha').addEventListener('click', function () {
+        var input = userInput.value;
+        userInput.value = '';
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                alert(xhttp.responseText);
+            }
+        };
+        xhttp.open("POST", '/captcha', true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("captcha=" + input);
+    });
+</script>
+</body>
+</html>
