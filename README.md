@@ -1,7 +1,15 @@
-## 开发调试
+## 快速上手
+
 首先需要安装 [GraphicsMagick](http://www.graphicsmagick.org/). Mac OS X 可以通过如下命令:
 
     brew install graphicsmagick
+    npm install campto --save
+
+    var campto = require('campto')();
+
+
+## 开发调试
+
     git clone git@github.com:vincenting/campto.git
     npm install
 

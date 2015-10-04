@@ -3,18 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Campto simple server</title>
+    <style>
+        #captchaPlaceholder {
+            cursor: pointer;
+        }
+    </style>
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>Campto simple server</h1>
 
-<p>
-    <img alt="验证码" id="captchaPlaceholder"/>
-    <small>图片点击刷新</small>
-</p>
+<div class="container">
+    <div class="page-header">
+        <h1>Campto simple server
+            <small>Simplify your captcha server</small>
+        </h1>
+    </div>
 
-<p><input type="text" id="captchaInput" placeholder="请计算图片中的题目"/></p>
+    <p>
+        <img alt="验证码" id="captchaPlaceholder"/>
+        <small>图片点击刷新</small>
+    </p>
 
-<button id="submitCaptcha">提交</button>
+    <p><input type="text" class="form-control" id="captchaInput" placeholder="请计算图片中的题目"/></p>
+
+    <button id="submitCaptcha" class="btn btn-default">提交</button>
+
+</div>
 <script>
     var placeholder = document.getElementById('captchaPlaceholder');
     var userInput = document.getElementById('captchaInput');
