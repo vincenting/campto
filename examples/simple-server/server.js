@@ -8,7 +8,9 @@ var express = require('express');
 var session = require('express-session');
 var path = require('path');
 var bodyParser = require('body-parser');
-var Captcha = require('../../lib/captcha');
+var Campto = require('../../');
+
+var campto = Campto();
 
 var app = express();
 
@@ -27,7 +29,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/captcha', function (req, res) {
-    Captcha.toBuffer(function (err, buffer, result) {
+    campto(function (err, buffer, result) {
         if (err) throw error;
         req.session['captcha'] = result + '';
         res.send(buffer);

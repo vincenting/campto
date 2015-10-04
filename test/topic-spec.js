@@ -5,7 +5,7 @@
 'use strict';
 
 var should = require('should');
-var Topic = require('../lib/captcha/topic');
+var Topic = require('../lib/topic/index');
 var _ = require('underscore');
 
 describe('number stringify', function () {
