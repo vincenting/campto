@@ -1,11 +1,16 @@
 {
   "name": "campto",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Captcha package for nodejs.",
   "main": "index.js",
-  "scripts": {
-    "test": "istanbul cover _mocha -- -R spec"
+  "engines": {
+    "node": ">= 0.8.0"
   },
+  "scripts": {
+    "test": "mocha --bail --reporter spec test/",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot test/",
+    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec test/"
+  }
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vincenting/campto.git"
