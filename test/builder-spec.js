@@ -39,11 +39,9 @@ describe('test without error', function () {
 
 describe('test with all known type error', function () {
     var t = Topic.rand();
-    var KNOWN_ERRORS = ['DRAW_TO_BUFFER_ERROR',
-        'DRAW_TEMP_FILE_CREATE_ERROR',
+    var KNOWN_ERRORS = [
+        'TEMP_FILE_CREATE_ERROR',
         'DRAW_TEMP_FILE_WRITE_ERROR',
-        'WORD_TO_BUFFER_ERROR',
-        'WORD_TEMP_FILE_CREATE_ERROR',
         'WORD_TEMP_FILE_WRITE_ERROR',
         'DRAW_BACKGROUND_IMG_ERROR'
     ];
