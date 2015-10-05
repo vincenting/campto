@@ -6,7 +6,7 @@ node_js:
   - "0.11"
   - "0.10"
   - "iojs"
-sudo: false
+sudo: required
 before_install:
   - "sudo apt-get install graphicsmagick"
   - "test $TRAVIS_NODE_VERSION != '0.8' || npm rm --save-dev istanbul"
