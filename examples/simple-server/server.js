@@ -32,6 +32,7 @@ app.get('/captcha', function (req, res) {
     campto(function (err, buffer, result) {
         if (err) throw error;
         req.session['captcha'] = result + '';
+        res.contentType = 'image/png';
         res.send(buffer);
     });
 });
