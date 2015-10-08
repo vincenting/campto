@@ -1,9 +1,9 @@
 # Campto
 
-[![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
+[![Code Climate][climate-image]][climate-url]
 
 ![Campto](https://raw.githubusercontent.com/vincenting/campto/master/examples/captcha.png)
 
@@ -52,11 +52,11 @@
 2. 完善 API 接口设计
 3. 提供更多可配置、可自定义的功能
 
-[npm-image]: https://img.shields.io/npm/v/campto.svg
-[npm-url]: https://www.npmjs.com/package/campto
 [travis-image]: https://img.shields.io/travis/vincenting/campto/master.svg
 [travis-url]: https://travis-ci.org/vincenting/campto
 [coveralls-image]: https://img.shields.io/coveralls/vincenting/campto/master.svg
 [coveralls-url]: https://coveralls.io/r/vincenting/campto?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/campto.svg
 [downloads-url]: https://npmjs.org/package/campto
+[climate-image]:https://codeclimate.com/github/vincenting/campto/badges/gpa.svg
+[climate-url]:https://codeclimate.com/github/vincenting/campto
