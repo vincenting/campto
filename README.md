@@ -42,6 +42,7 @@
 ## 运行测试
 
     npm test
+    npm run-script test-cov
 
 进入 /examples/simple-server 运行 `node server.js` 启动测试服务器
 
