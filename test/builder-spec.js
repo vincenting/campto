@@ -12,6 +12,7 @@ var CaptchaBuilder = require('../lib/builder');
 var Topic = require('../lib/topic');
 
 describe('test without error', function () {
+    this.timeout(20000);
     var t = Topic.rand();
 
     it('should callback with result and create file when use toFile', function (done) {
@@ -38,6 +39,8 @@ describe('test without error', function () {
 });
 
 describe('test with all known type error', function () {
+    this.timeout(20000);
+
     var t = Topic.rand();
     var KNOWN_ERRORS = [
         'TEMP_FILE_CREATE_ERROR',
