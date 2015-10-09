@@ -28,7 +28,7 @@ describe('test without error', function () {
     });
 
     it('should callback with result buffer when use toBuffer', function (done) {
-        CaptchaBuilder.toBuffer(t.subject, function (err, buffer) {
+        CaptchaBuilder.toBuffer(t.subject.split(' '), function (err, buffer) {
             should(err).be.exactly(null);
             should(this._done_for_debug).be.exactly(true);
             should(buffer.length > 0).be.exactly(true);

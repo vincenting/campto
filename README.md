@@ -3,7 +3,7 @@
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
-[![Code Climate][climate-image]][climate-url]
+[![Windows Tests][appveyor-image]][appveyor-url]
 
 ![Campto](https://raw.githubusercontent.com/vincenting/campto/master/examples/captcha.png)
 
@@ -73,5 +73,7 @@
 [coveralls-url]: https://coveralls.io/r/vincenting/campto?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/campto.svg
 [downloads-url]: https://npmjs.org/package/campto
-[climate-image]:https://codeclimate.com/github/vincenting/campto/badges/gpa.svg
-[climate-url]:https://codeclimate.com/github/vincenting/campto
+[climate-image]: https://codeclimate.com/github/vincenting/campto/badges/gpa.svg
+[climate-url]: https://codeclimate.com/github/vincenting/campto
+[appveyor-image]: https://img.shields.io/appveyor/ci/vincenting/compto/master.svg?label=Windows%20Tests
+[appveyor-url]: https://ci.appveyor.com/project/vincenting/campto

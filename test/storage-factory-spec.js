@@ -40,4 +40,9 @@ describe('new storage registered', function () {
 
         s.someMethod().should.equal('hello world');
     });
+
+    it('should use redisStorage if no options given', function () {
+        var s = new StorageFactory();
+        s.__type.should.equal('redis');
+    });
 });
