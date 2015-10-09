@@ -30,7 +30,7 @@ test_script:
   # Output useful info for debugging.
   - node --version
   - npm --version
-  - cmd: test ! -z $(npm -ps ls istanbul) || npm test
+  - cmd: npm t
 
 os:
   - Default Azure
