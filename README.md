@@ -32,7 +32,23 @@
 
 #### 2. 高并发下的缓存方案
 
-正在开发中，请稍等。
+开启方式：在项目根目录下新建 `campto.js` 最终 `module.exports = {}` 或者 `campto.json`，基础配置如下：
+
+    {
+        "preBuild": true,
+        "storage": {
+            "type": "redis",
+            "conn": "redis://user:pass@host:port",
+            "database": "1"
+        },
+        "pidPath": "pids"
+    }
+
+其中 `storage` 非必填项，默认会使用本地 `127.0.0.1` 端口为 `6379` 的 redis，选择数据库 1 作为存储方案。更多的优化以及配置方案请参考配置文件介绍。
+
+#### 3. campto.js/campto.json 配置文件详细介绍
+
+即将到来。
 
 ## 开发调试
 
@@ -48,9 +64,8 @@
 
 ## TODO
 
-1. 完成缓存策略，即提前预生产一定数量验证码，然后一定情况下触发更新
-2. 完善 API 接口设计
-3. 提供更多可配置、可自定义的功能
+1. 完善、优化 API 接口设计
+2. 提供更多可配置、可自定义的功能，方便在 campto 的架构上设计出更多的验证码方案
 
 [travis-image]: https://img.shields.io/travis/vincenting/campto/master.svg
 [travis-url]: https://travis-ci.org/vincenting/campto
