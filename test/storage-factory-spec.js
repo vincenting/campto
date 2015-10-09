@@ -18,7 +18,7 @@ describe('factory use with error', function () {
 
     it('should throw error if init with unknown storage type', function () {
         (function () {
-            new StorageFactory('fakeStorageType');
+            new StorageFactory({type: 'fakeStorageType'});
         }).should.throw(Error);
     });
 });
@@ -36,7 +36,7 @@ describe('new storage registered', function () {
             return 'hello world';
         };
         StorageFactory.register('userStorage', klass);
-        var s = new StorageFactory('userStorage');
+        var s = new StorageFactory({type: 'userStorage'});
 
         s.someMethod().should.equal('hello world');
     });
