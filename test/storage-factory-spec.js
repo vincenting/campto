@@ -44,6 +44,6 @@ describe('new storage registered', function () {
     it('should use redisStorage if no options given', function () {
         var s = new StorageFactory(process
             .env.hasOwnProperty('DEVELOP_REDIS_URI') ? {uri: process.env['DEVELOP_REDIS_URI']} : undefined);
-        s.__type.should.equal('redis');
+        s.__$type.should.equal('redis');
     });
 });

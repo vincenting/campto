@@ -16,19 +16,19 @@ var redisPort = redisUri.split(':')[2];
 describe('redis storage init', function () {
     it('should use uri if exist', function () {
         var s = new StorageFactory({uri: redisUri, type: 'redis'});
-        s.__type.should.equal('redis');
+        s.__$type.should.equal('redis');
     });
 
     it('should use host or use default if exist', function () {
         var s = new StorageFactory({host: redisHost, type: 'redis'});
-        s.__type.should.equal('redis');
+        s.__$type.should.equal('redis');
         var ss = new StorageFactory({host: redisHost, port: redisPort, type: 'redis'});
-        ss.__type.should.equal('redis');
+        ss.__$type.should.equal('redis');
     });
 
     it('should use database if exist', function () {
         var s = new StorageFactory({host: redisHost, type: 'redis', database: 1});
-        s.__type.should.equal('redis');
+        s.__$type.should.equal('redis');
     });
 
 });
