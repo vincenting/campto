@@ -31,8 +31,10 @@
   "homepage": "https://github.com/vincenting/campto#readme",
   "dependencies": {
     "async": "^1.4.2",
+    "forever": "^0.15.1",
     "gm": "^1.20.0",
     "node-uuid": "^1.4.3",
+    "redis": "^2.1.0",
     "temp": "^0.8.3",
     "underscore": "^1.8.3"
   },

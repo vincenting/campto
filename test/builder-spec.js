@@ -12,6 +12,7 @@ var CaptchaBuilder = require('../lib/builder');
 var Topic = require('../lib/topic');
 
 describe('test without error', function () {
+    this.timeout(20000);
     var t = Topic.rand();
 
     it('should callback with result and create file when use toFile', function (done) {
@@ -24,11 +25,11 @@ describe('test without error', function () {
                 fs.unlinkSync(tempFileName);
                 done();
             });
-        });
+        }, {captcha_height: 10});
     });
 
     it('should callback with result buffer when use toBuffer', function (done) {
-        CaptchaBuilder.toBuffer(t.subject, function (err, buffer) {
+        CaptchaBuilder.toBuffer(t.subject.split(' '), function (err, buffer) {
             should(err).be.exactly(null);
             should(this._done_for_debug).be.exactly(true);
             should(buffer.length > 0).be.exactly(true);
@@ -38,6 +39,8 @@ describe('test without error', function () {
 });
 
 describe('test with all known type error', function () {
+    this.timeout(20000);
+
     var t = Topic.rand();
     var KNOWN_ERRORS = [
         'TEMP_FILE_CREATE_ERROR',
@@ -45,7 +48,7 @@ describe('test with all known type error', function () {
         'WORD_TEMP_FILE_WRITE_ERROR',
         'DRAW_BACKGROUND_IMG_ERROR'
     ];
-
+    
     it('should always done whatever error happened when use toFile', function (done) {
         var tempFileName = './temp.png';
         async.map(KNOWN_ERRORS, function (error, callback) {
