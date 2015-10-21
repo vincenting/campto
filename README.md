@@ -68,8 +68,11 @@
 
 ## TODO
 
-1. 完善、优化 API 接口设计
-2. 提供更多可配置、可自定义的功能，方便在 campto 的架构上设计出更多的验证码方案
+1. 完善、优化 API 接口设计；
+2. 引入动态生成验证码背景（生成后使用临时文件重复使用）；
+3. 可选验证码识别难度等级，影响背景的干扰图案、文字上图案线条干扰、以及验证码内容变形；
+4. 可选多种 topic，包括固定长度的英文字母、现有的算术题、中文成语；
+5. 配置文件支持自定义 背景图片方式、随机颜色集、字体集、验证码大小、题目生成、自定义缓存存储。
 
 [travis-image]: https://img.shields.io/travis/vincenting/campto/master.svg
 [travis-url]: https://travis-ci.org/vincenting/campto
