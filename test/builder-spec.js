@@ -25,7 +25,7 @@ describe('test without error', function () {
                 fs.unlinkSync(tempFileName);
                 done();
             });
-        });
+        }, {captcha_height: 10});
     });
 
     it('should callback with result buffer when use toBuffer', function (done) {
@@ -48,7 +48,7 @@ describe('test with all known type error', function () {
         'WORD_TEMP_FILE_WRITE_ERROR',
         'DRAW_BACKGROUND_IMG_ERROR'
     ];
-
+    
     it('should always done whatever error happened when use toFile', function (done) {
         var tempFileName = './temp.png';
         async.map(KNOWN_ERRORS, function (error, callback) {

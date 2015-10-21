@@ -36,7 +36,7 @@ describe('new storage registered', function () {
             return 'hello world';
         };
         StorageFactory.register('userStorage', klass);
-        var s = new StorageFactory({type: 'userStorage'});
+        var s = StorageFactory.create({type: 'userStorage'});
 
         s.someMethod().should.equal('hello world');
     });
@@ -45,5 +45,36 @@ describe('new storage registered', function () {
         var s = new StorageFactory(process
             .env.hasOwnProperty('DEVELOP_REDIS_URI') ? {uri: process.env['DEVELOP_REDIS_URI']} : undefined);
         s.__$type.should.equal('redis');
+    });
+});
+
+describe('storage usage', function () {
+    it('should count and return object when nextCaptcha', function (done) {
+        var klass = {};
+        StorageFactory.implementNeededMethods.forEach(function (item) {
+            klass[item] = function () {
+
+            };
+        });
+        klass.count = function (callback) {
+            this.__$count = this.__$count ? this.__$count + 1 : 1;
+            if (this.__$count % 2 === 0) {
+                return callback('SomeError');
+            }
+            callback(null);
+        };
+        klass.next = function (callback) {
+            callback(null, this.__$count);
+        };
+
+        StorageFactory.register('userStorage', klass);
+        var s = StorageFactory.create({type: 'userStorage'});
+        s.nextCaptcha(function (err, result) {
+            result.should.equal(1);
+            s.nextCaptcha(function (err) {
+                err.should.equal('SomeError');
+                done();
+            });
+        });
     });
 });
