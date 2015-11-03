@@ -15,11 +15,11 @@ if (!campto.camptoConfig['preBuild']) {
 }
 
 var program = require('commander');
+var monitor = new campto.Monitor(campto.camptoConfig);
 
 program
   .version(require('../package').version, null)
-  .action(function(command) {
-    var monitor = new campto.Monitor(campto.camptoConfig);
+  .action(function (command) {
     try {
       monitor[command]();
     } catch (e) {

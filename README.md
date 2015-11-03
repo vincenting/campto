@@ -42,10 +42,10 @@
             "database": "1"
         },
         "pidPath": "pids",
-        initialCount: 1000,
-        checkInterval: 2,
-        threshold: 20,
-        updateCount: 40
+        "initialCount": 1000,
+        "checkInterval": 2,
+        "threshold": 20,
+        "updateCount": 40
     }
 
 其中 `storage` 非必填项，默认会使用本地 `127.0.0.1` 端口为 `6379` 的 redis，选择数据库 1 作为存储方案。更多的优化以及配置方案请参考配置文件介绍。

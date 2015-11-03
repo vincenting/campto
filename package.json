@@ -10,9 +10,9 @@
     "campto": "./bin/cli.js"
   },
   "scripts": {
-    "test": "mocha --bail --reporter spec test/",
-    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot test/",
-    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec test/"
+    "test": "mocha --bail --reporter spec test/**/*-spec.js",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot test/**/*-spec.js",
+    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec test/**/*-spec.js"
   },
   "repository": {
     "type": "git",
