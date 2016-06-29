@@ -1,12 +1,12 @@
 {
-  "preBuild": true,
-  "storage": {
-    "type": "redis",
-    "database": "1"
-  },
-  "pidPath": "pids",
-  "initialCount": 1000,
-  "checkInterval": 2,
-  "threshold": 20,
-  "updateCount": 40
+    "preBuild": true,
+    "storage": {
+        "type": "redis",
+        "database": "1"
+    },
+    "pidPath": "pids",
+    "initialCount": 1000,
+    "checkInterval": 2,
+    "threshold": 20,
+    "updateCount": 40
 }

@@ -5,5 +5,3 @@ pids/
 *.seed
 coverage/
 node_modules/
-
-.idea/

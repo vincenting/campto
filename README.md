@@ -21,7 +21,7 @@
 
 代码示例：
 
-    var campto = require('campto')();
+    const campto = require('campto')();
     campto(function(err, buffer, result){
         // err 为系统中可能的错误
         // buffer 为验证码图片的 buffer，express 中可以直接 res.send(buffer) 返回图片（png）

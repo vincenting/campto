@@ -6,5 +6,4 @@ pids/
 coverage/
 node_modules/
 
-.idea/
 test/
