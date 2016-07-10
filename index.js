@@ -2,6 +2,6 @@
  * Created by vt on 15/9/29.
  */
 
-'use strict';
+'use strict'
 
-module.exports = require('./lib').defaultServer;
+module.exports = require('./lib').defaultServer

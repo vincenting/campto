@@ -2,121 +2,140 @@
  * Created by vt on 15/10/9.
  */
 
-'use strict';
+'use strict'
 
-var should = require('should');
-var async = require('async');
+const should = require('should')
+const url = require('url')
+const Promise = require('bluebird')
+const _ = require('lodash')
 
-var StorageFactory = require('../lib/storage/factory');
+const StorageFactory = require('../lib/storage/factory')
 
-var redisUri = process.env.hasOwnProperty('DEVELOP_REDIS_URI') ?
-    process.env['DEVELOP_REDIS_URI'] : 'redis://127.0.0.1:6379';
-var redisHost = redisUri.split(':')[1].substring(2);
-var redisPort = redisUri.split(':')[2];
+const redisUri = process.env.hasOwnProperty('DEVELOP_REDIS_URI') &&
+  process.env['DEVELOP_REDIS_URI'] || 'redis://127.0.0.1:6379/0'
+const parsedRedisUri = url.parse(redisUri)
+const redisHost = parsedRedisUri.hostname
+const redisPort = parsedRedisUri.port
 
 describe('redis storage init', function () {
-    it('should use uri if exist', function () {
-        var s = new StorageFactory({uri: redisUri, type: 'redis'});
-        s.__$type.should.equal('redis');
-    });
+  it('should use uri if exist', function () {
+    const s = new StorageFactory({
+      uri: redisUri,
+      type: 'redis'
+    })
+    s.__$type.should.equal('redis')
+  })
 
-    it('should use host or use default if exist', function () {
-        var s = new StorageFactory({host: redisHost, type: 'redis'});
-        s.__$type.should.equal('redis');
-        var ss = new StorageFactory({host: redisHost, port: redisPort, type: 'redis'});
-        ss.__$type.should.equal('redis');
-    });
+  it('should use host or use default if exist', function () {
+    const s = new StorageFactory({
+      host: redisHost,
+      type: 'redis'
+    })
+    s.__$type.should.equal('redis')
+    const ss = new StorageFactory({
+      host: redisHost,
+      port: redisPort,
+      type: 'redis'
+    })
+    ss.__$type.should.equal('redis')
+  })
 
-    it('should use database if exist', function () {
-        var s = new StorageFactory({host: redisHost, type: 'redis', database: 1});
-        s.__$type.should.equal('redis');
-    });
-});
+  it('should use database if exist', function () {
+    const s = new StorageFactory({
+      host: redisHost,
+      type: 'redis',
+      database: 1
+    })
+    s.__$type.should.equal('redis')
+  })
+})
 
-var createRedisStorage = function () {
-    return StorageFactory.create({host: redisHost, type: 'redis', database: 1});
-};
+const createRedisStorage = function () {
+  return StorageFactory.create({
+    host: redisHost,
+    type: 'redis',
+    database: 1
+  })
+}
 
 describe('redis storage usage', function () {
-    it('should clear all keys after flush', function (done) {
-        var s = createRedisStorage();
-        s.conn.SET(s.storedKey, '1', function () {
-            s.conn.SET(s.countKey, '1', function () {
-                s.flush(function () {
-                    async.every([s.storedKey, s.countKey], function (item, callback) {
-                        s.conn.EXISTS(item, function (err, result) {
-                            return callback(!err && result == 0);
-                        });
-                    }, function (result) {
-                        should(result).be.exactly(true);
-                        done();
-                    });
-                });
-            })
-        })
-    });
+  it('should clear all keys after flush', function () {
+    const store = createRedisStorage()
+    const conn = store.conn
+    return Promise.all([
+      conn.setAsync(store.storedKey, '1'),
+      conn.setAsync(store.countKey, '1')
+    ]).then(_ => {
+      return store.flush()
+    }).then($ => {
+      return Promise.mapSeries([store.storedKey, store.countKey], conn.existsAsync.bind(conn)).then(results => {
+        should(_.every(results, result => result == 0)).eql(true)
+      })
+    })
+  })
 
-    it('should raise error if empty', function (done) {
-        var s = createRedisStorage();
-        s.flush(function () {
-            s.next(function (err) {
-                err.message.should.equal('No item can be found in storage');
-                done();
-            });
-        })
-    });
+  it('should return null if empty', function () {
+    const store = createRedisStorage()
+    return store.flush().then(_ => {
+      return store.next()
+    }).then(result => {
+      should(result).eql(null)
+    })
+  })
 
-    it('should raise error if anything unexpected', function (done) {
-        var s = createRedisStorage();
-        s.flush(function () {
-            s.conn.SET(s.storedKey, '1', function () {
-                s.next(function (err) {
-                    err.message.should.equal('WRONGTYPE Operation against a key holding the wrong kind of value');
-                    done();
-                });
-            });
-        });
-    });
+  it('should raise error if anything unexpected', function () {
+    const store = createRedisStorage()
+    const conn = store.conn
+    return store.flush().then(_ => {
+      return conn.setAsync(store.storedKey, '1')
+    }).then(_ => {
+      return store.next()
+    }).catch(err => {
+      err.message.should.equal('WRONGTYPE Operation against a key holding the wrong kind of value')
+    })
+  })
 
-    it('should next with success after update success', function (done) {
-        var s = createRedisStorage();
-        s.flush(function () {
-            var data = {path: '/', result: 1};
-            s.update([data], function () {
-                s.next(function (_, d) {
-                    d.should.eql(data);
-                    done();
-                });
-            });
-        });
-    });
+  it('should next with success after update success', function () {
+    const store = createRedisStorage()
+    const conn = store.conn
+    const data = {
+      path: '/',
+      result: 1
+    }
+    return store.flush().then(_ => {
+      return store.update([data])
+    }).then(_ => {
+      return store.next()
+    }).then(result => {
+      result.should.eql(data)
+    })
+  })
 
-    it('should throw error if update with error', function (done) {
-        var s = createRedisStorage();
-        s.flush(function () {
-            s.conn.SET(s.storedKey, '1', function () {
-                s.update([{}], function (err) {
-                    err.message.should.equal('WRONGTYPE Operation against a key holding the wrong kind of value');
-                    done();
-                });
-            });
-        });
-    });
+  it('should throw error if update with error', function () {
+    const store = createRedisStorage()
+    const conn = store.conn
+    return store.flush().then(_ => {
+      return conn.setAsync(store.storedKey, '1')
+    }).then(_ => {
+      return store.update([{}])
+    }).catch(err => {
+      err.message.should.equal('WRONGTYPE Operation against a key holding the wrong kind of value')
+    })
+  })
 
-    it('should increase in multi-thread with count', function (done) {
-        var s = createRedisStorage();
-        s.flush(function () {
-            async.times(5, function (n, next) {
-                var v = createRedisStorage();
-                v.nextCaptcha(function (err) {
-                    next(err)
-                });
-            }, function () {
-                s.currentLoad(function (err, count) {
-                    count.should.equal(5);
-                    done();
-                });
-            })
-        });
-    });
-});
+  it('should increase in multi-thread with count', function () {
+    let store = createRedisStorage()
+    return store.flush().then(_ => {
+      return store.update([{}])
+    }).then($ => {
+      return Promise.all(_.times(5, _ => {
+        let _store = createRedisStorage()
+        return _store.nextCaptcha()
+      }))
+    }).then(_ => {
+      return store.currentLoad()
+    }).then(result => {
+      result.should.equal(5)
+    })
+  })
+})

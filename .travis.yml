@@ -1,19 +1,12 @@
 language: node_js
 node_js:
-  - "4.1"
-  - "4.0"
-  - "0.12"
-  - "0.11"
-  - "0.10"
-  - "iojs"
+  - "4.4"
+  - "5.11"
+  - "6.2"
 sudo: required
 services:
   - redis-server
 before_install:
   - "sudo apt-get install graphicsmagick"
-  - "test $TRAVIS_NODE_VERSION != '0.8' || npm rm --save-dev istanbul"
-script:
-  - "test ! -z $(npm -ps ls istanbul) || npm test"
-  - "test   -z $(npm -ps ls istanbul) || npm run-script test-travis"
-after_script:
-  - "test -e ./coverage/lcov.info && npm install coveralls@2 && cat ./coverage/lcov.info | coveralls"
+script: "npm run-script test-ci"
+after_script: "npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls"
