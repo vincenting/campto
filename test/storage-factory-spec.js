@@ -5,6 +5,7 @@
 'use strict'
 
 const should = require('should')
+const Promise = require('bluebird')
 
 const StorageFactory = require('../lib/storage/factory')
 
@@ -47,32 +48,36 @@ describe('new storage registered', function () {
 })
 
 describe('storage usage', function () {
-  it('should count and return object when nextCaptcha', function (done) {
+  it('should count and return object when nextCaptcha', function () {
     let klass = {}
     StorageFactory.implementNeededMethods.forEach(item => {
       klass[item] = _ => 0
     })
-    klass.count = function (callback) {
-      this.__$count = this.__$count ? this.__$count + 1 : 1
-      if (this.__$count % 2 === 0) {
-        return callback('SomeError')
-      }
-      callback(null)
+    klass.count = function () {
+      return new Promise((resolve, reject) => {
+        this.__$count = this.__$count ? this.__$count + 1 : 1
+        if (this.__$count % 2 === 0) {
+          return reject('SomeError')
+        }
+        resolve()
+      })
     }
     klass.next = function (callback) {
-      callback(null, this.__$count)
+      return new Promise((resolve, reject) => {
+        resolve(this.__$count)
+      })
     }
 
     StorageFactory.register('userStorage', klass)
-    const s = StorageFactory.create({
+    const store = StorageFactory.create({
       type: 'userStorage'
     })
-    s.nextCaptcha(function (err, result) {
-      result.should.equal(1)
-      s.nextCaptcha(function (err) {
-        err.should.equal('SomeError')
-        done()
-      })
+    return store.nextCaptcha().then(result => {
+      return result.should.equal(1)
+    }).then(_ => {
+      return store.nextCaptcha()
+    }).catch(err => {
+      return err.should.equal('SomeError')
     })
   })
 })
