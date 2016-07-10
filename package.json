@@ -1,6 +1,6 @@
 {
   "name": "campto",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Best captcha package for nodejs.",
   "main": "index.js",
   "engines": {
@@ -33,7 +33,6 @@
   },
   "homepage": "https://github.com/vincenting/campto#readme",
   "dependencies": {
-    "async": "^2.0.0-rc.6",
     "bluebird": "^3.4.1",
     "commander": "^2.9.0",
     "forever": "^0.15.2",
@@ -46,9 +45,10 @@
   "devDependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "express-session": "^1.13.0",
+    "express-session": "^1.14.0",
+    "async": "^2.0.0-rc.6",
     "istanbul": "^0.4.4",
-    "mocha": "~2.5.3",
-    "should": "~9.0.2"
+    "mocha": "^2.5.3",
+    "should": "^9.0.2"
   }
 }
