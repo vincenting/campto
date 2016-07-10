@@ -13,6 +13,8 @@
 
     brew install graphicsmagick
 
+同时请确保您的 nodejs 版本为 >= 4.0.0，0.x 版本都将于今年年底前停止支持，参考 [Nodejs LTS 现状](https://github.com/nodejs/LTS#lts_schedule)。
+
 #### 1. 无缓存方案使用
 
 该方案的优势是简单，但是由于每张验证码都需要实时生成，所以无法满足秒杀等高并发场景。

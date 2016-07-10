@@ -1,53 +1,54 @@
 {
-    "name": "campto",
-    "version": "0.0.5",
-    "description": "Best captcha package for nodejs.",
-    "main": "index.js",
-    "engines": {
-        "node": ">= 4.0.0"
-    },
-    "bin": {
-        "campto": "./bin/cli.js"
-    },
-    "scripts": {
-        "test": "mocha --bail --reporter spec test/**/*-spec.js",
-        "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot test/**/*-spec.js",
-        "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/**/*-spec.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/vincenting/campto.git"
-    },
-    "keywords": [
-        "nodejs",
-        "captcha",
-        "campto"
-    ],
-    "author": {
-        "name": "Vincent Ting",
-        "email": "homerdd@gmail.com"
-    },
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/vincenting/campto/issues"
-    },
-    "homepage": "https://github.com/vincenting/campto#readme",
-    "dependencies": {
-        "async": "^2.0.0-rc.6",
-        "commander": "^2.9.0",
-        "forever": "^0.15.2",
-        "gm": "^1.22.0",
-        "node-uuid": "^1.4.7",
-        "redis": "^2.6.2",
-        "temp": "^0.8.3",
-        "lodash": "^4.13.1"
-    },
-    "devDependencies": {
-        "body-parser": "^1.15.2",
-        "express": "^4.14.0",
-        "express-session": "^1.13.0",
-        "istanbul": "^0.4.4",
-        "mocha": "~2.5.3",
-        "should": "~9.0.2"
-    }
+  "name": "campto",
+  "version": "0.0.5",
+  "description": "Best captcha package for nodejs.",
+  "main": "index.js",
+  "engines": {
+    "node": ">= 4.0.0"
+  },
+  "bin": {
+    "campto": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "mocha --bail --reporter spec test/**/*-spec.js",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot test/**/*-spec.js",
+    "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/**/*-spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincenting/campto.git"
+  },
+  "keywords": [
+    "nodejs",
+    "captcha",
+    "campto"
+  ],
+  "author": {
+    "name": "Vincent Ting",
+    "email": "homerdd@gmail.com"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vincenting/campto/issues"
+  },
+  "homepage": "https://github.com/vincenting/campto#readme",
+  "dependencies": {
+    "async": "^2.0.0-rc.6",
+    "bluebird": "^3.4.1",
+    "commander": "^2.9.0",
+    "forever": "^0.15.2",
+    "gm": "^1.22.0",
+    "lodash": "^4.13.1",
+    "node-uuid": "^1.4.7",
+    "redis": "^2.6.2",
+    "temp": "^0.8.3"
+  },
+  "devDependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-session": "^1.13.0",
+    "istanbul": "^0.4.4",
+    "mocha": "~2.5.3",
+    "should": "~9.0.2"
+  }
 }
