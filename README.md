@@ -24,10 +24,9 @@
 代码示例：
 
     const campto = require('campto')();
-    campto(function(err, buffer, result){
-        // err 为系统中可能的错误
-        // buffer 为验证码图片的 buffer，express 中可以直接 res.send(buffer) 返回图片（png）
-        // result 为当前验证码的结果，建议放入 session 中，int10 类型。
+    campto().then(captcha => {
+        // captcha.buffer 为验证码图片的 buffer，express 中可以直接 res.send(buffer) 返回图片（png）
+        // captcha.result 为当前验证码的结果，建议放入 session 中，int10 类型。
     });
 
 使用参考 https://github.com/vincenting/campto/blob/master/examples/simple-server/server.js

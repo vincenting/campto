@@ -8,9 +8,8 @@ const express = require('express')
 const session = require('express-session')
 const path = require('path')
 const bodyParser = require('body-parser')
-const Campto = require('../../')
+const campto = require('../../')()
 
-const campto = Campto()
 const app = express()
 
 app.use(session({
@@ -28,11 +27,10 @@ app.get('/', function (req, res) {
 })
 
 app.get('/captcha', function (req, res) {
-  campto(function (err, buffer, result) {
-    if (err) throw error
-    req.session['captcha'] = result + ''
+  campto().then(captcha => {
+    req.session['captcha'] = captcha.result + ''
     res.contentType = 'image/png'
-    res.send(buffer)
+    res.send(captcha.buffer)
   })
 })
 
