@@ -5,14 +5,16 @@
 'use strict'
 
 const should = require('should')
+const url = require('url')
 const async = require('async')
 
 const StorageFactory = require('../lib/storage/factory')
 
-const redisUri = process.env.hasOwnProperty('DEVELOP_REDIS_URI') &&
-  process.env['DEVELOP_REDIS_URI'] || 'redis://127.0.0.1:6379'
-const redisHost = redisUri.split(':')[1].substring(2)
-const redisPort = redisUri.split(':')[2]
+const redisUri =process.env.hasOwnProperty('DEVELOP_REDIS_URI') &&
+  process.env['DEVELOP_REDIS_URI'] || 'redis://127.0.0.1:6379/0'
+const parsedRedisUri =  url.parse(redisUri)
+const redisHost = parsedRedisUri.hostname
+const redisPort = parsedRedisUri.port
 
 describe('redis storage init', function () {
   it('should use uri if exist', function () {

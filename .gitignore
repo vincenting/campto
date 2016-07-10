@@ -3,5 +3,6 @@ logs/
 pids/
 *.pid
 *.seed
+.vscode/
 coverage/
 node_modules/
