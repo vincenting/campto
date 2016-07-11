@@ -27,10 +27,14 @@ app.get('/', function (req, res) {
 })
 
 app.get('/captcha', function (req, res) {
-  campto().then(captcha => {
+  campto({
+    recognitionDifficulty: 'hard'
+  }).then(captcha => {
     req.session['captcha'] = captcha.result + ''
     res.contentType = 'image/png'
     res.send(captcha.buffer)
+  }).catch(err => {
+    res.status(500).send(err)
   })
 })
 
