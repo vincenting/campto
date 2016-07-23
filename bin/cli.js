@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const _ = require('lodash')
 const campto = require('../lib')
 
 if (Object.keys(campto.camptoConfig).length === 0) {

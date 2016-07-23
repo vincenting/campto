@@ -4,6 +4,7 @@ pids/
 *.pid
 *.seed
 coverage/
+.editorconfig
 node_modules/
 
 test/

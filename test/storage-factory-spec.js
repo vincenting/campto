@@ -7,7 +7,7 @@
 const should = require('should')
 const Promise = require('bluebird')
 
-const StorageFactory = require('../lib/storage/factory')
+const StorageFactory = require('../lib/storages')
 
 describe('factory use with error', function () {
   it('should throw error if klass not implement all methods', function () {
@@ -39,10 +39,7 @@ describe('new storage registered', function () {
   })
 
   it('should use redisStorage if no options given', function () {
-    const s = new StorageFactory(
-      process.env.hasOwnProperty('DEVELOP_REDIS_URI') && {
-        uri: process.env['DEVELOP_REDIS_URI']
-      } || undefined)
+    const s = new StorageFactory()
     s.__$type.should.equal('redis')
   })
 })

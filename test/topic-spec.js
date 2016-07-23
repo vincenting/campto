@@ -5,30 +5,30 @@
 'use strict'
 
 const should = require('should')
-const Topic = require('../lib/topic/index')
 const _ = require('lodash')
+const MathTopic = require('../lib/topics/math')
 
 describe('number stringify', function () {
   it('should return `数` if number lt 10', function () {
-    Topic._numToChinese(10).should.eql([1, '十'])
+    MathTopic._numToChinese(10).should.eql([1, '十'])
   })
 
   it('should return  十`数` if number gt 10 and lt 20', function () {
-    Topic._numToChinese(15).should.eql([2, '十 五'])
+    MathTopic._numToChinese(15).should.eql([2, '十 五'])
   })
 
   it('should return `数`十 if number gt 20 and can be exact division by 10', function () {
-    Topic._numToChinese(30).should.eql([2, '三 十'])
+    MathTopic._numToChinese(30).should.eql([2, '三 十'])
   })
 
   it('should return `数`十`数` if number gt 20 and can not be exact division by 10', function () {
-    Topic._numToChinese(45).should.eql([3, '四 十 五'])
+    MathTopic._numToChinese(45).should.eql([3, '四 十 五'])
   })
 })
 
 describe('parse to subject', function () {
   it('should has no equal statement if currentLen === 6', function () {
-    let t = new Topic()
+    let t = new MathTopic()
     t._le = [3, '四 十 五']
     t._rt = [3, '二 十 五']
     t._operator = '+'
@@ -37,7 +37,7 @@ describe('parse to subject', function () {
   })
 
   it('should has no equal if currentLen === 5 && _optLen === 2', function () {
-    let t = new Topic()
+    let t = new MathTopic()
     t._le = [3, '四 十 五']
     t._rt = [2, '二 十']
     t._operator = '+'
@@ -46,7 +46,7 @@ describe('parse to subject', function () {
   })
 
   it('should size CAPTCHA_LEN default', function () {
-    let t = new Topic()
+    let t = new MathTopic()
     t._le = [1, '五']
     t._rt = [2, '二 十']
     t._operator = '+'
@@ -57,7 +57,7 @@ describe('parse to subject', function () {
 
 describe('rand tests', function () {
   it('should always set operator to +/-', function () {
-    let t = new Topic()
+    let t = new MathTopic()
     t._randOperator()
     _(100).times(function () {
       should(['+', '-'].indexOf(t._operator) > -1).be.exactly(true)
@@ -66,12 +66,12 @@ describe('rand tests', function () {
 
   it('should always return number of chinese', function () {
     _(100).times(function () {
-      should(['2', '二'].indexOf(Topic._randStringify(2)[1]) > -1).be.exactly(true)
+      should(['2', '二'].indexOf(MathTopic._randStringify(2)[1]) > -1).be.exactly(true)
     })
   })
 
   it('should all lt 30 if operator is +', function () {
-    let t = new Topic()
+    let t = new MathTopic()
     t._operator = '+'
     _(100).times(function () {
       t._rand()
@@ -82,7 +82,7 @@ describe('rand tests', function () {
   })
 
   it('should _leNum gt _rtNum if operator is -', function () {
-    let t = new Topic()
+    let t = new MathTopic()
     t._operator = '-'
     _(100).times(function () {
       t._rand()
@@ -95,6 +95,6 @@ describe('rand tests', function () {
 
 describe('nothing', function () {
   it('should run well', function () {
-    Topic.rand().should.be.instanceof(Topic)
+    MathTopic.rand().should.be.instanceof(MathTopic)
   })
 })
