@@ -67,7 +67,7 @@ describe('redis storage usage', function () {
       conn.setAsync(store.countKey, '1')
     ]).then(_ => {
       return store.flush()
-    }).then($ => {
+    }).then(() => {
       return Promise.mapSeries([store.storedKey, store.countKey], conn.existsAsync.bind(conn)).then(results => {
         should(_.every(results, result => result == 0)).eql(true)
       })
@@ -127,7 +127,7 @@ describe('redis storage usage', function () {
     let store = createRedisStorage()
     return store.flush().then(_ => {
       return store.update([{}])
-    }).then($ => {
+    }).then(() => {
       return Promise.all(_.times(5, _ => {
         let _store = createRedisStorage()
         return _store.nextCaptcha()
