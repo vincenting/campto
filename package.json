@@ -12,7 +12,7 @@
   "scripts": {
     "test": "mocha --bail --reporter spec test/**/*-spec.js",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot test/**/*-spec.js",
-    "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/**/*-spec.js"
+    "test-ci": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec"
   },
   "repository": {
     "type": "git",
