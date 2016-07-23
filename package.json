@@ -46,9 +46,9 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "express-session": "^1.14.0",
-    "async": "^2.0.0-rc.6",
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
+    "mocha-lcov-reporter": "^1.2.0",
     "should": "^9.0.2"
   }
 }

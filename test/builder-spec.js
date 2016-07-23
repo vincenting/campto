@@ -4,7 +4,6 @@
 
 'use strict'
 
-const async = require('async')
 const Promise = require('bluebird')
 const fs = Promise.promisifyAll(require('fs'))
 const should = require('should')
