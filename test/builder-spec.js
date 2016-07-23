@@ -9,11 +9,11 @@ const fs = Promise.promisifyAll(require('fs'))
 const should = require('should')
 
 const CaptchaBuilder = require('../lib/builder')
-const Topic = require('../lib/topic')
+const TopicStore = require('../lib/topics')
 
 describe('test without error', function () {
   this.timeout(20000)
-  const topic = Topic.rand()
+  const topic = TopicStore.generateFrom('math')
 
   it('should callback with result and create file when use toFile', function () {
     const tempFileName = './temp.png'

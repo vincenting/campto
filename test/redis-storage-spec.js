@@ -9,10 +9,9 @@ const url = require('url')
 const Promise = require('bluebird')
 const _ = require('lodash')
 
-const StorageFactory = require('../lib/storage/factory')
+const StorageFactory = require('../lib/storages')
 
-const redisUri = process.env.hasOwnProperty('DEVELOP_REDIS_URI') &&
-  process.env['DEVELOP_REDIS_URI'] || 'redis://127.0.0.1:6379/0'
+const redisUri = 'redis://127.0.0.1:6379/0'
 const parsedRedisUri = url.parse(redisUri)
 const redisHost = parsedRedisUri.hostname
 const redisPort = parsedRedisUri.port
@@ -69,7 +68,7 @@ describe('redis storage usage', function () {
       return store.flush()
     }).then(() => {
       return Promise.mapSeries([store.storedKey, store.countKey], conn.existsAsync.bind(conn)).then(results => {
-        should(_.every(results, result => result == 0)).eql(true)
+        should(results.every(result => result == 0)).eql(true)
       })
     })
   })

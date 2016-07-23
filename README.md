@@ -5,7 +5,11 @@
 [![Test Coverage][coveralls-image]][coveralls-url]
 [![Windows Tests][appveyor-image]][appveyor-url]
 
-![Campto](https://raw.githubusercontent.com/vincenting/campto/master/examples/captcha.png)
+![Campto](https://raw.githubusercontent.com/vincenting/campto/master/assets/captchas/default.png)
+
+## 特色功能
+
+1. 可配置验证码的生成难度
 
 ## 快速上手
 
@@ -33,10 +37,10 @@ campto(options).then(captcha => {
 })
 ```
 
-这里的 options 为可选参数，和 `compto.[json|js]` 基本一致，例如 options 可以指定当前生成验证码的识别难度：
+这里的 options 为可选参数，和 `campto.[json|js]` 基本一致，例如 options 可以指定当前生成验证码的识别难度[easy|normal|hard]：
 
 ```javascript
-const campto = require('campto')(options)
+const campto = require('campto')()
 campto({
   recognitionDifficulty: 'hard'
 }).then(...)
@@ -58,22 +62,25 @@ campto({
 
 ## 开发调试
 
-    git clone git@github.com:vincenting/campto.git
-    npm install
+```shell
+git clone git@github.com:vincenting/campto.git
+npm install
+```
 
 ## 运行测试
 
-    npm test
-    npm run-script test-cov
+```shell
+npm test
+npm run test-cov
+```
 
 进入 /examples/simple-server 运行 `node server.js` 启动测试服务器
 
 ## TODO
 
-1. 引入动态生成验证码背景（生成后使用临时文件重复使用）；
-2. 可选多种 topic，包括固定长度的英文字母、现有的算术题、中文成语；
-3. 完善高并发下缓存方案的设计；
-4. 配置文件支持自定义 背景图片方式、随机颜色集、字体集、验证码大小、题目生成、自定义缓存存储。
+1. 配置文件支持自定义 背景图片方式、随机颜色集、字体集、验证码大小、题目生成、自定义缓存存储；
+2. 可选多种 topic，默认支持包括固定长度的英文字母、现有的算术题、英文和数字混合模式；
+3. 完善高并发下缓存方案的设计。
 
 [travis-image]: https://img.shields.io/travis/vincenting/campto/master.svg
 [travis-url]: https://travis-ci.org/vincenting/campto
@@ -81,7 +88,5 @@ campto({
 [coveralls-url]: https://coveralls.io/r/vincenting/campto?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/campto.svg
 [downloads-url]: https://npmjs.org/package/campto
-[climate-image]: https://codeclimate.com/github/vincenting/campto/badges/gpa.svg
-[climate-url]: https://codeclimate.com/github/vincenting/campto
-[appveyor-image]: https://img.shields.io/appveyor/ci/vincenting/compto/master.svg?label=Windows%20Tests
+[appveyor-image]: https://img.shields.io/appveyor/ci/vincenting/campto/master.svg?label=Windows%20Tests
 [appveyor-url]: https://ci.appveyor.com/project/vincenting/campto
