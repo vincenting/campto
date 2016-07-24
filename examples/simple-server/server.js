@@ -8,7 +8,7 @@ const express = require('express')
 const session = require('express-session')
 const path = require('path')
 const bodyParser = require('body-parser')
-const campto = require('../../')()
+const campto = require('../../')
 
 const app = express()
 

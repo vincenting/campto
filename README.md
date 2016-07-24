@@ -30,7 +30,7 @@
 代码示例：
 
 ```javascript
-const campto = require('campto')(options)
+const campto = require('campto')
 campto(options).then(captcha => {
   // captcha.buffer 为验证码图片的 buffer，express 中可以直接 res.send(buffer) 返回图片（png）
   // captcha.result 为当前验证码的结果，建议放入 session 中，int10 类型。
@@ -40,7 +40,7 @@ campto(options).then(captcha => {
 这里的 options 为可选参数，和 `campto.[json|js]` 基本一致，例如 options 可以指定当前生成验证码的识别难度[easy|normal|hard]：
 
 ```javascript
-const campto = require('campto')()
+const campto = require('campto')
 campto({
   recognitionDifficulty: 'hard'
 }).then(...)
