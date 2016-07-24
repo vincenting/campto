@@ -4,4 +4,4 @@
 
 'use strict'
 
-module.exports = require('./lib').defaultGenerator
+module.exports = require('./lib').defaultGenerator()

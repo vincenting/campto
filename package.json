@@ -1,6 +1,6 @@
 {
   "name": "campto",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Best captcha package for nodejs.",
   "main": "index.js",
   "engines": {
