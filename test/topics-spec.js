@@ -10,48 +10,48 @@ const MathTopic = require('../lib/topics/math')
 
 describe('number stringify', function () {
   it('should return `数` if number lt 10', function () {
-    MathTopic._numToChinese(10).should.eql([1, '十'])
+    MathTopic._numToChinese(10).should.eql(['十'])
   })
 
   it('should return  十`数` if number gt 10 and lt 20', function () {
-    MathTopic._numToChinese(15).should.eql([2, '十 五'])
+    MathTopic._numToChinese(15).should.eql(['十', '五'])
   })
 
   it('should return `数`十 if number gt 20 and can be exact division by 10', function () {
-    MathTopic._numToChinese(30).should.eql([2, '三 十'])
+    MathTopic._numToChinese(30).should.eql(['三', '十'])
   })
 
   it('should return `数`十`数` if number gt 20 and can not be exact division by 10', function () {
-    MathTopic._numToChinese(45).should.eql([3, '四 十 五'])
+    MathTopic._numToChinese(45).should.eql(['四', '十', '五'])
   })
 })
 
 describe('parse to subject', function () {
   it('should has no equal statement if currentLen === 6', function () {
     let t = new MathTopic()
-    t._le = [3, '四 十 五']
-    t._rt = [3, '二 十 五']
+    t._le = ['四', '十', '五']
+    t._rt = ['二', '十', '五']
     t._operator = '+'
     t._optLen = 4
-    t._prepareSubject().should.eql(['四 十 五', '加', '二 十 五'])
+    t._prepareSubject().should.eql(['四', '十', '五', '加', '二', '十', '五'])
   })
 
   it('should has no equal if currentLen === 5 && _optLen === 2', function () {
     let t = new MathTopic()
-    t._le = [3, '四 十 五']
-    t._rt = [2, '二 十']
+    t._le = ['四', '十', '五']
+    t._rt = ['二', '十']
     t._operator = '+'
     t._optLen = 2
-    t._prepareSubject().should.eql(['四 十 五', '加 上', '二 十'])
+    t._prepareSubject().should.eql(['四', '十', '五', '加', '上', '二', '十'])
   })
 
   it('should size CAPTCHA_LEN default', function () {
     let t = new MathTopic()
-    t._le = [1, '五']
-    t._rt = [2, '二 十']
+    t._le = ['五']
+    t._rt = ['二', '十']
     t._operator = '+'
     t._optLen = 1
-    t._prepareSubject().should.eql(['五', '加', '二 十', '是 多 少'])
+    t._prepareSubject().should.eql(['五', '加', '二', '十', '是', '多', '少'])
   })
 })
 
@@ -66,7 +66,7 @@ describe('rand tests', function () {
 
   it('should always return number of chinese', function () {
     _(100).times(function () {
-      should(['2', '二'].indexOf(MathTopic._randStringify(2)[1]) > -1).be.exactly(true)
+      should(['2', '二'].indexOf(MathTopic._randStringify(2)[0]) > -1).be.exactly(true)
     })
   })
 
