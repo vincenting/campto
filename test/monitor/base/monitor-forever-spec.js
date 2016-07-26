@@ -5,6 +5,7 @@
 'use strict'
 
 process.env['CAMPTO_ROOT_DIR'] = __dirname
+delete require.cache[require.resolve('../../../lib')]
 
 const campto = require('../../../lib')
 const should = require('should')
