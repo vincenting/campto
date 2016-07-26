@@ -10,6 +10,7 @@
 ## 特色功能
 
 1. 可配置验证码的生成难度
+2. 可配置验证码宽高颜色字体以及背景
 
 ## 快速上手
 
@@ -37,7 +38,7 @@ campto(options).then(captcha => {
 })
 ```
 
-这里的 options 为可选参数，和 `campto.[json|js]` 基本一致，例如 options 可以指定当前生成验证码的识别难度[easy|normal|hard]：
+这里的 options 为可选参数，和 `campto.[json|js]` 基本一致，例如 `options` 可以指定当前生成验证码的识别难度 `[easy|normal|hard]` ：
 
 ```javascript
 const campto = require('campto')
@@ -46,7 +47,8 @@ campto({
 }).then(...)
 ```
 
-使用参考 https://github.com/vincenting/campto/blob/master/examples/simple-server/server.js
+使用参考 https://github.com/vincenting/campto/blob/master/examples/simple-server/server.js 。
+更多参数请参考 [campto.[json|js] 配置文件详细介绍](#3-camptojsonjs-配置文件详细介绍)
 
 #### 2. 高并发下的缓存方案
 
@@ -54,7 +56,16 @@ campto({
 
 #### 3. campto.[json|js] 配置文件详细介绍
 
-即将到来。
+```javascript
+{
+  "captchaHeight": Int, 验证码高度，默认 50,
+  "captchaWidth": Int, 验证码宽度，默认 285,
+  "randColorSet": []String, 随机颜色集，用于文字和线条，默认 ['#000000', ...],
+  "backgroundSet": []String，随机背景图片路径集合，建议高度宽度与验证码一致,
+  "fontFileSet": []String，随机验证码字体文件路劲集合,
+  "recognitionDifficulty": String, 验证码识别难度，默认为 "normal"，可选 easy|normal|hard
+}
+```
 
 #### 4. API 介绍
 
@@ -78,9 +89,8 @@ npm run test-cov
 
 ## TODO
 
-1. 配置文件支持自定义 背景图片方式、随机颜色集、字体集、验证码大小、题目生成、自定义缓存存储；
-2. 可选多种 topic，默认支持包括固定长度的英文字母、现有的算术题、英文和数字混合模式；
-3. 完善高并发下缓存方案的设计。
+1. 可选多种 topic，默认支持包括固定长度的英文字母、现有的算术题、英文和数字混合模式；
+2. 完善高并发下缓存方案的设计。
 
 [travis-image]: https://img.shields.io/travis/vincenting/campto/master.svg
 [travis-url]: https://travis-ci.org/vincenting/campto
