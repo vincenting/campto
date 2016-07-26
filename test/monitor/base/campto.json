@@ -5,10 +5,12 @@
     "database": "1"
   },
   "recognitionDifficulty": "normal",
+  "topic": "number",
+  "captchaWidth": 305,
+  "captchaHeight": 50,
   "pidPath": "pids",
   "initialCount": 1000,
   "checkInterval": 2,
   "threshold": 20,
   "updateCount": 40
 }
-

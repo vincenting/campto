@@ -9,8 +9,9 @@
 
 ## 特色功能
 
-1. 可配置验证码的生成难度
-2. 可配置验证码宽高颜色字体以及背景
+1. 可配置验证码的生成难度；
+2. 可配置验证码宽高颜色字体以及背景；
+3. 多种预设 Topic(验证码内容生成器)，同时可以引入自定义的内容。
 
 ## 快速上手
 
@@ -62,7 +63,7 @@ campto({
   "captchaWidth": Int, 验证码宽度，默认 285,
   "randColorSet": []String, 随机颜色集，用于文字和线条，默认 ['#000000', ...],
   "backgroundSet": []String，随机背景图片路径集合，建议高度宽度与验证码一致,
-  "fontFileSet": []String，随机验证码字体文件路劲集合,
+  "fontFileSet": []String，随机验证码字体文件路径集合,
   "recognitionDifficulty": String, 验证码识别难度，默认为 "normal"，可选 easy|normal|hard
 }
 ```
@@ -89,8 +90,8 @@ npm run test-cov
 
 ## TODO
 
-1. 可选多种 topic，默认支持包括固定长度的英文字母、现有的算术题、英文和数字混合模式；
-2. 完善高并发下缓存方案的设计。
+1. 完善高并发下缓存方案的设计；
+2. `lib/builder` 中目前由于对 `gm` 熟悉度优先，通过临时文件拼接产生验证码的方式xuyåo改进。
 
 [travis-image]: https://img.shields.io/travis/vincenting/campto/master.svg
 [travis-url]: https://travis-ci.org/vincenting/campto
