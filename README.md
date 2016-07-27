@@ -55,14 +55,14 @@ campto({
 
 #### 2. campto.[json|js] 配置文件详细介绍
 
-```javascript
+```
 {
   "captchaHeight": Int, 验证码高度，默认 50,
   "captchaWidth": Int, 验证码宽度，默认 285,
   "randColorSet": []String, 随机颜色集，用于文字和线条，默认 ['#000000', ...],
   "backgroundSet": []String，随机背景图片路径集合，建议高度宽度与验证码一致,
   "fontFileSet": []String，随机验证码字体文件路径集合,
-  "topic:: [String|Promise|Function]，验证码内容选项，默认为 "math"，可选 math|number|alphabet，同时支持直接传入自定义 topic
+  "topic:: [String|Promise|Function]，验证码内容选项，默认为 "math"，可选 math|number|alphabet，同时支持直接传入自定义 topic,
   "recognitionDifficulty": String, 验证码识别难度，默认为 "normal"，可选 easy|normal|hard
 }
 ```
