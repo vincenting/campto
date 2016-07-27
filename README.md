@@ -7,6 +7,8 @@
 
 ![Campto](https://raw.githubusercontent.com/vincenting/campto/master/assets/captchas/default.png)
 
+（从做到右 `topic` 依次为 `alphabet`, `number`, `math` ）
+
 ## 特色功能
 
 1. 可配置验证码的生成难度；
@@ -51,11 +53,7 @@ campto({
 使用参考 https://github.com/vincenting/campto/blob/master/examples/simple-server/server.js 。
 更多参数请参考 [campto.[json|js] 配置文件详细介绍](#3-camptojsonjs-配置文件详细介绍)
 
-#### 2. 高并发下的缓存方案
-
-即将到来。
-
-#### 3. campto.[json|js] 配置文件详细介绍
+#### 2. campto.[json|js] 配置文件详细介绍
 
 ```javascript
 {
@@ -64,9 +62,45 @@ campto({
   "randColorSet": []String, 随机颜色集，用于文字和线条，默认 ['#000000', ...],
   "backgroundSet": []String，随机背景图片路径集合，建议高度宽度与验证码一致,
   "fontFileSet": []String，随机验证码字体文件路径集合,
+  "topic:: [String|Promise|Function]，验证码内容选项，默认为 "math"，可选 math|number|alphabet，同时支持直接传入自定义 topic
   "recognitionDifficulty": String, 验证码识别难度，默认为 "normal"，可选 easy|normal|hard
 }
 ```
+
+`topic` 参数详细介绍：除了可以传入上述文档中涉及到 `String` 类型内容外，还可以传入 `Promise` 以及 `Function`，用于自定义生成验证码内容，其中前者多用于有异步操作的情况。
+如果是 `Function`，最终需要返回 `{subject: []String, result: Any}`，如果是 `Promise`，最终也需要确保可以通过 `.then` 得到相同的数据结构，subject 中每个 String 为基本等宽的内容，例如可以认为一个汉字和两个阿拉伯数字等宽。
+
+例如用于最终可以生成六个数字的验证码的代码：
+
+```javascript
+{
+  topic: _ => {
+    const t = String(Math.random()).substr(2, 6)
+    return {
+      subject: t.split(''),
+      result: t
+    }
+  }
+}
+```
+
+```javascript
+{
+  topic: _ => {
+    return Promise((resolve, reject) => {
+      // ... some async code
+      return resolve({
+        subject: t.split(''),
+        result: t
+      })
+    })
+  }
+}
+```
+
+#### 3. 高并发下的缓存方案
+
+即将到来。
 
 #### 4. API 介绍
 
@@ -91,7 +125,7 @@ npm run test-cov
 ## TODO
 
 1. 完善高并发下缓存方案的设计；
-2. `lib/builder` 中目前由于对 `gm` 熟悉度优先，通过临时文件拼接产生验证码的方式xuyåo改进。
+2. `lib/builder` 中目前由于对 `gm` 熟悉度有限，通过临时文件拼接产生验证码的方式需要整体改进。
 
 [travis-image]: https://img.shields.io/travis/vincenting/campto/master.svg
 [travis-url]: https://travis-ci.org/vincenting/campto
