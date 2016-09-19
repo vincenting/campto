@@ -86,15 +86,13 @@ campto({
 
 ```javascript
 {
-  topic: _ => {
-    return Promise((resolve, reject) => {
-      // ... some async code
-      return resolve({
-        subject: t.split(''),
-        result: t
-      })
+  topic: _ => new Promise((resolve, reject) => {
+    // ... some async code
+    return resolve({
+      subject: t.split(''),
+      result: t
     })
-  }
+  })
 }
 ```
 
