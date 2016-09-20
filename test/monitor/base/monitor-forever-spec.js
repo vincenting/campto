@@ -12,7 +12,7 @@ const should = require('should')
 
 describe('config auto load', function () {
   it('should get from current project root', function () {
-    campto.camptoConfig['pidPath'].should.equal('pids')
+    campto.camptoConfig['pidPath'].should.equal('.campto/pids')
   })
 })
 
