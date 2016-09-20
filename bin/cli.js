@@ -9,7 +9,7 @@ if (Object.keys(campto.camptoConfig).length === 0) {
 }
 if (!campto.camptoConfig['preBuild']) {
   console.error('\x1b[31m%s\x1b[0m',
-    'Please set preBuild to true in your config file.')
+    'WARN::Please set preBuild to true in your config file.')
   process.exit(1)
 }
 
@@ -23,7 +23,7 @@ program
       monitor[command]()
     } catch (e) {
       console.error('\x1b[31m%s\x1b[0m',
-        'Command `' + command + ' does not support.')
+        'Command `' + command + ` does not support.\n${e}`)
     }
   })
 

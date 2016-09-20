@@ -4,5 +4,6 @@ pids/
 *.pid
 *.seed
 .vscode/
+.campto/
 coverage/
 node_modules/

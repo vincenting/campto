@@ -123,7 +123,9 @@ npm run test-cov
 ## TODO
 
 1. 完善高并发下缓存方案的设计；
-2. `lib/builder` 中目前由于对 `gm` 熟悉度有限，通过临时文件拼接产生验证码的方式需要整体改进。
+2. 使用 jslint 规范整体代码风格;
+3. 增加英文版本的 README (HELP NEEDED);
+4. `lib/builder` 中目前由于对 `gm` 熟悉度有限，通过临时文件拼接产生验证码的方式需要整体改进。
 
 [travis-image]: https://img.shields.io/travis/vincenting/campto/master.svg
 [travis-url]: https://travis-ci.org/vincenting/campto
