@@ -38,9 +38,9 @@
     "forever": "^0.15.2",
     "gm": "^1.22.0",
     "lodash": "^4.13.1",
-    "node-uuid": "^1.4.7",
     "redis": "^2.6.2",
-    "temp": "^0.8.3"
+    "temp": "^0.8.3",
+    "uuid": "^3.0.0"
   },
   "devDependencies": {
     "body-parser": "^1.15.2",
